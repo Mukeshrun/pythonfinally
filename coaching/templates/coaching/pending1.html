@@ -1,0 +1,78 @@
+{% extends 'coaching/admin_home.html' %}
+{% block middle %}
+ <script>
+ var formData = new FormData();
+ $(document).on('change', 'select.status', function () {
+  var x=$(this).val()
+  var y=$(this).attr('id');
+  var currentRow = $(this).closest("tr");
+  var col1 = currentRow.find("td:eq(0)").text();
+   formData.append('cid', x)
+   formData.append('id',y)
+   formData.append('action', 'status_post')
+   formData.append('tr', col1)
+   
+
+   formData.append('csrfmiddlewaretoken', '{{ csrf_token }}')
+
+   $.ajax({
+
+     type: 'POST',
+     url: '{% url "status_post" %}',
+
+     data: formData,
+
+     cache: false,
+
+     processData: false,
+
+     contentType: false,
+
+     enctype: 'multipart/form-data',
+
+     success: function (data) {
+      currentRow.remove()
+      
+     },
+
+     error: function (xhr, errmsg, err) {
+
+       console.log(xhr.status + ":" + xhr.responseText)
+
+     }
+
+   })
+
+ })
+</script>
+ <script>
+     $(document).ready(function() {
+    $('#example').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
+        ]
+    } );
+} );
+    </script>
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    <h1 class="text-center">Jobseekers</h1>
+    <hr>
+    <table class="table table-hover display">
+       <thead> <tr>
+           <th>Name</th><th>Email</th><th>Member</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody>
+              {% for i in key %}
+            <tr id="{{i.member}}"><td>{{i.name}}</td><td>{{i.email}}</td><td>{{i.member}}</td><td><select id="{{i.id}}" name="status" class="status">
+                <option value="Pending" {% if i.status == "Pending" %} selected="true"  {% endif %}>Pending</option>,
+                <option value="Accept" {% if i.status == "Accept" %} selected="true"  {% endif %}>Accept</option>
+                <option value="Reject" {% if i.status == "Reject" %} selected="true" {% endif %}>Reject</option><td><a href="{% url 'delete_jobseekers1' i.id %}"  class="btn btn-primary" onclick="return confirm('Are you sure')" >Delete</a></td></tr></tbody>
+                {% endfor %}  
+    </table>
+</body>
+{% endblock %}

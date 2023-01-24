@@ -1,0 +1,80 @@
+{% extends 'coaching/jobseekerhomelayout.html' %}
+{% block middle %}
+<h1 class="text-center">Hello Jobseekar</h1>
+<div class="container-fluid mt-5">
+  <div class="row justify-content-evenly text-center">
+    
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row justify-content-evenly text-center">
+    <div class="col-8 p-2">
+      <form action="jobget" method="post">
+        {% csrf_token %}
+        <!-- <input list="magicHouses" id="myHouse" name="myHouse" placeholder="type here..." /> -->
+        <input list="magicHouses" class="py-1" size="40" autocomplete="off" id="myHouse" name="jobtitle" onkeyup="show(this.value)" placeholder="Job title..." />
+	<datalist id="magicHouses">
+</datalist><span><input list="cityname" class="py-1" size="40" autocomplete="off" id="myHouse" name="city" onkeyup="citydata(this.value)" placeholder="City..." />
+	<datalist id="cityname">
+</datalist></span><span><button class="btn btn-primary" type="submit">Find Jobs</button></span>
+    </form>
+<div class="container-fluid mt-5">
+  <div class="row justify-content-center">
+      <div class="col-6">
+        {% for i in key %}
+          <table class="table" border="3px solid black" mt="5px">
+            <tr><td>Logo</td><td><img src="/media/{{i.logo}}" height="100" width="100" /></td></tr> 
+              <tr>
+                  <td>Job Title</td>
+                  <td>{{i.job_title}}</td>
+              </tr>
+              <tr>
+                  <td>Job Detail</td>
+                  <td>{{i.job_detail}}</td>
+              </tr>
+              <tr>
+                  <td>Salary</td>
+                  <td>{{i.salary}}</td>
+              </tr>
+              <tr>
+                  <td>Education</td>
+                  <td>{{i.education}}</td>
+              </tr>
+              <tr>
+                  <td>Experience</td>
+                  <td>{{i.experience}}</td>
+              </tr>
+              <tr>
+                  <td>Vacancy</td>
+              <td>{{i.vacancy}}</td>
+              </tr>
+              <tr>
+                  <td>City</td>
+                  <td>{{i.city}}</td>
+              </tr>
+              <tr>
+                  <td>Company</td>
+                  <td>{{i.company}}</td>
+              </tr>
+              <tr>
+                  <td>Hr Email</td>
+                  <td>{{i.hr_email}}</td>
+              </tr>
+              <tr>
+                <td>Start Date</td>
+                <td>{{i.start_date}}</td>
+              </tr>
+              <tr>
+                <td>End Date</td>
+                <td>{{i.end_date}}</td>
+              </tr>
+              <tr><td><a href="{% url 'applied' i.id %}">Have you applied?</a></td></tr>
+             
+          </table>
+          
+          
+          {% endfor %}
+      </div>
+  </div>
+</div>
+{% endblock %}

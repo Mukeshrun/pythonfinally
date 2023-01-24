@@ -1,0 +1,56 @@
+{% extends 'coaching/admin_home.html' %}
+{% block middle %}
+<script>
+        function list(a)
+        {
+           var xmlhttp = new XMLHttpRequest();
+             xmlhttp.onreadystatechange=function()
+             {
+                
+                document.getElementById("list").innerHTML=xmlhttp.responseText;
+               
+             }
+            xmlhttp.open("GET","userlist?q="+a,true);
+            xmlhttp.send();
+        }
+     
+     
+     </script>
+<div class="container mt-3">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <form action="" method="post" class="text-center">
+                {% csrf_token %}
+                <h3 class="text-center badge bg-primary text-wrap" style="width:8rem;">Jobseekar List</h3>
+            <select name="course" id="" class="form-select" onchange="list(this.value)">
+                <option value="Java">Java</option>
+                <option value="PHP">PHP</option>
+                <option value="Python">Python</option>
+                <option value="ASP.NET">ASP.NET</option>
+                <option value="Web design">Web design</option>
+                <option value="MEAN STACK | ANGULAR">MEAN STACK | ANGULAR</option>
+                <option value="NODE JS">NODE JS</option>
+                <option value="MERN STACK">MERN STACK</option>
+                <option value="React JS">React JS</option>
+                <option value="Data Science">Data Science</option>
+                <option value="C & C++">C & C++</option>
+                <option value="Android/IOS">Android/IOS</option>
+                <option value="Software Testing">Software Testing</option>
+                <option value="Database">Database</option>
+                <option value="Digital Marketing">Digital Marketing</option>
+                <option value="Cloud Computing">Cloud Computing</option>
+                <option value="Cyber Security">Cyber Security</option>
+                <option value="Block Chain">Block Chain</option>
+                <option value="IOT">IOT</option>
+            </select>
+        </form>
+
+        </div>
+    </div>
+<div class="row mt-3 justify-content-center">
+    <div class="col-10" id="list">
+   
+    </div>
+</div>
+</div>
+{% endblock %}

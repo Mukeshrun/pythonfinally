@@ -1,0 +1,21 @@
+{% extends 'coaching/jobseekerhomelayout.html' %}
+{% block middle %}
+<div class="container-fluid mt-5">
+    <div class="row justify-content-center">
+        <div class="col-10 border border-2">
+            <h1 class="text-center">Applied JOB</h1>
+            <table class="table table-bordered">
+                
+                <tr><th>Job Title</th><th>Company Name</th><th>City</th><th>Applied Date</th></tr>
+                {% for i in key %}
+                <tr>
+                    <td>{{i.job.job_title}}</td><td>{{i.job.company}}</td><td>{{i.job.city}}</td><td>{{i.apply_date}}</td>
+                </tr>
+        
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+    
+{% endblock %}

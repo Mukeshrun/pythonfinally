@@ -1,0 +1,84 @@
+{% extends 'coaching/admin_home.html' %}
+{% block middle %}
+<h1 class="text-center text-primary mt-2">Old Job</h1>
+<div class="container-fluid mt-3">
+    <div class="row justify-content-center">
+        
+        <div class="col-6">
+            {% for i in key %}
+            <table class="table" border="3px solid black" mt="5px">
+                
+                <tr>
+                    <td>Job Title</td>
+                    <td>{{i.job_title}}</td>
+                </tr>
+                <tr>
+                    <td>Job Detail</td>
+                    <td>{{i.job_detail}}</td>
+                </tr>
+                <tr>
+                    <td>Salary</td>
+                    <td>{{i.salary}}</td>
+                </tr>
+                <tr>
+                    <td>Education</td>
+                    <td>{{i.education}}</td>
+                </tr>
+                <tr>
+                    <td>Experience</td>
+                    <td>{{i.experience}}</td>
+                </tr>
+                <tr>
+                    <td>Vacancy</td>
+                <td>{{i.vacancy}}</td>
+                </tr>
+                <tr>
+                    <td>City</td>
+                    <td>{{i.city}}</td>
+                </tr>
+                <tr>
+                    <td>Company</td>
+                    <td>{{i.company}}</td>
+                </tr>
+                <tr>
+                    <td>Start Date </td>
+                    <td>{{i.start_date}}</td></tr>
+                <tr>
+                    <td>End Date</td>
+                    <td>{{i.end_date}}</td>
+                </tr>
+                <tr>
+                    <td>Company Address</td>
+                    <td>{{i.company_address}}</td>
+                </tr>
+                <tr>
+                    <td>Company Logo</td>
+                    <td><img src="/media/{{i.logo}}" height="100" width="100" /> </td>
+                </tr>
+                <tr>
+                    <td>Hr Email</td>
+                    <td>{{i.hr_email}}</td>
+                </tr>
+                <tr>
+                    <td><a href="{% url 'jobapply' i.id %}">See Candidate Applied</a></td>
+                </tr>
+            </table>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div>
+    <span>
+        {% if key.has_previous %}
+        <a href="?page={{key.previous_page_number}}">Previous</a>
+        {% endif %}
+
+        <span>{{key.number}}</span>
+
+        {% if key.has_next %}
+        <a href="?page={{key.next_page_number}}">Next</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}

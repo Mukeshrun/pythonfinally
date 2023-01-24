@@ -1,0 +1,27 @@
+{% extends 'coaching/jobseekerhomelayout.html' %}
+{% block middle %}
+<body class="bg-primary">
+    <div class="container">
+        <div class="row justify-content-center border border-info mt-5 mb-5 bg-white">
+            <div class="col-6 bg-white">
+                <h1 class="text-center">Jobseekar Profile</h1>
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                <table class="table">
+                    <tr><td>Name</td><td><input type="text" name="name" value="{{key.name}}" ></td></tr>
+                    <tr><td>Email</td><td><input type="email" name="email" value="{{key.email}}" ></td></tr>
+                    <tr><td>Contact Number</td><td><input type="number" name="mobile" value="{{key.mobile}}"></td></tr>
+                    <tr><td>Date of Birth</td><td><input type="date" required name="dob" value="{{key.dob}}"></td></tr>
+                </table>
+                <hr>
+                <table class="table">
+                    <tr><th>Education</th><th>Stream</th><th>Percentage Obtained</th><th>Passing Year</th></tr>
+                    <tr><td>1O <sup>th</sup></td><td><input type="text" name="tenstream" value="{{key.primary_stream}}"></td><td><input type="text" name="tenper" value="{{key.primary_percentage}}"></td><td><input type="text" name="tenpass" value="{{key.primary_year}}"></td></tr>
+                    <tr><td>12<sup>th</sup></td><td><input type="text" name="twelvetream" value="{{key.secondary_stream}}"></td><td><input type="text" name="twelveper"  value="{{key.secondary_percentage}}"></td><td><input type="text" name="twelevepass" value="{{key.secondary_year}}"></td></tr>
+                    <tr><td>Graduation</td><td><input type="text" name="gradutionstream" value="{{key.graduation_stream}}"></td><td><input type="text" name="gradutionper" value="{{key.graduation_percentage}}"></td><td><input type="text" name="gradutionpass" value="{{key.graduation_year}}"></td></tr>
+                    <tr><td>Post Graduation(If Any)</td><td><input type="text" name="pgradutionstream" value="{{key.post_graduation_stream}}"></td><td><input type="text" name="pgradutionper" value="{{key.post_graduation_percentage}}"></td><td><input type="text" name="pgradutionpass" value="{{key.post_graduation_year}}"></td></tr>
+                    <tr><td><input type="submit" class="btn btn-primary" value="Update"></td></tr>
+                </table>
+                </form>
+            </div>
+{% endblock %}

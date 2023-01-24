@@ -1,0 +1,17 @@
+{% extends 'coaching/jobseekerhomelayout.html' %}
+{% block middle %}
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="radio" {% if data == 'Yes' %} checked="true" {% endif %} name="apply" id="yes" value="Yes">
+        <label for="yes">Yes</label>
+        <input type="radio" {% if data == 'No' %} checked="true" {% endif %} name="apply" id="no" value="No">
+        <label for="no">No</label>
+        <input type="submit" name="" id="" value="Submit">
+    </form>
+    {% if data1 %}
+    <script>
+        alert("You Have Already Applied For This job...")
+        window.location=('{% url "jobseekerhome"  %}')
+    </script>
+    {% endif %}
+{% endblock %}

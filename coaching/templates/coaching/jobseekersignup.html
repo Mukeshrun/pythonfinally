@@ -1,0 +1,109 @@
+{% extends 'coaching/layout.html' %}
+{% block middle %}
+    <script>
+        function show(a) {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+
+                document.getElementById("branchset").innerHTML = xmlhttp.responseText;
+
+            }
+            xmlhttp.open("GET", "/branch?q=" + a, true);
+            xmlhttp.send();
+        }
+        function showdata() {
+            document.getElementById('branchset').innerHTML = ""
+        }
+    </script>
+    <section style="background-color: #508bfc;">   <div class="container-fluid d-flex justify-content-center" style="background-color: #508bfc;">
+        <div class="row">
+            <div class="col-md-12 bg-white my-5" style="border-radius: 1rem;">
+                <h1 class="text-center">Jobseeker Sign Up</h1>
+                <form class="form-container mt-3 mb-2" method="post">
+                    {% csrf_token %}
+                    <div class="form-group-col-10">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" name="name" id="name" required>
+                    </div>
+                    <div class="form-group-col-10">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" name="email" id="email" required>
+                    </div>
+                    <div class="form-group-col-6">
+                        <label for="course">Course</label>
+                        <select name="course" class="form-select" id="course" required>
+                            <option value="Java">Java</option>
+                            <option value="PHP">PHP</option>
+                            <option value="Python">Python</option>
+                            <option value="ASP.NET">ASP.NET</option>
+                            <option value="Web design">Web design</option>
+                            <option value="MEAN STACK | ANGULAR">MEAN STACK | ANGULAR</option>
+                            <option value="NODE JS">NODE JS</option>
+                            <option value="MERN STACK">MERN STACK</option>
+                            <option value="React JS">React JS</option>
+                            <option value="Data Science">Data Science</option>
+                            <option value="C & C++">C & C++</option>
+                            <option value="Android/IOS">Android/IOS</option>
+                            <option value="Software Testing">Software Testing</option>
+                            <option value="Database">Database</option>
+                            <option value="Cloud Computing">Cloud Computing</option>
+                            <option value="Cyber Security">Cyber Security</option>
+                            <option value="Block Chain">Block Chain</option>
+                            <option value="IOT">IOT</option>
+                        </select>
+                    </div>
+                    <div class="form-group-col-md-6">
+                        <label for="coursetype">Course Type</label>
+                        <select name="coursetype" class="form-select" id="coursetype" required>
+                            <option value="Corporate">Corporate</option>
+                            <option value="Job Assistance">Job Assistance</option>
+                            <option value="Certification">Certification</option>
+                            <option value="Intership">Intership</option>
+                        </select>
+                    </div>
+                    <div class="form-group-col-md-6">
+                        <label for="member">Member Of Shiva Concept Solution</label><br>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label" for="inlineRadio1">Yes</label>
+                            <input class="form-check-input" type="radio"  name="member" id="inlineRadio1" value="Yes" onclick="show(this.value)">
+                            
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <label class="form-check-label" for="inlineRadio2">No</label>
+                            <input class="form-check-input" type="radio" name="member" id="inlineRadio2" value="No" onclick="showdata()">              
+                          </div>
+                        </div>
+                        <div class="form-group-col-md-6" id="branchset">
+                           <input type="hidden" name="branch" value="NA">
+                        </div>
+                            <div class="form-group-col-6">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" name="password" id="password">
+                            </div>    
+                                <div class="row my-3">
+                                <div class="col-2">
+                                    <input type="submit" class="btn btn-primary" value="Register">
+                                </div>
+                                <div class="col-2 ms-5">
+                                    <a href="jobseekerlogin" class="btn btn-primary">Login</a>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                                   </form>     
+    </div>
+</section>
+ 
+    {% if success == 'yes' %}
+    <script>
+        alert("Registeration successfull...Once Admin approve you will be able to login")
+        window.location = ('{% url "index"  %}')
+    </script>
+    {% endif %}
+    {% if success == 'not' %}
+    <script>
+        alert("User Already Exist")
+    </script>
+    {% endif %}
+
+{% endblock %}

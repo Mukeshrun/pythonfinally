@@ -1,0 +1,50 @@
+{% extends 'coaching/admin_home.html' %}
+{% block middle %}
+ <script>
+ var formData = new FormData();
+ $(document).on('change', 'select.status', function (e) {
+   e.preventDefault()
+   var x=$(this).val()
+   var y=$(this).attr('id');
+   formData.append('cid', x)
+   formData.append('id',y)
+   formData.append('action', 'status_post')
+   formData.append('csrfmiddlewaretoken', '{{ csrf_token }}')
+   $.ajax({
+     type: 'POST',
+     url: '{% url "status_post" %}',
+     data: formData,
+     cache: false,
+     processData: false,
+     contentType: false,
+     enctype: 'multipart/form-data',
+     success: function () {
+     },
+     error: function (xhr, errmsg, err) {
+console.log(xhr.status + ":" + xhr.responseText)
+     }
+
+   })
+
+ })
+</script>
+    <h1 class="text-center text-primary">All Jobseekar</h1>
+    <div class="container-fluid mt-5">
+      <div class="row">
+        <div class="col-12">
+          <table class="table table-hover display"  id="example">
+            <thead> <tr>
+                <th>Name</th><th>Email</th><th>Member</th><th>Status</th><th>Action</th></tr></thead>
+                 {% for i in key %}
+                 <tbody>
+                 <tr><td>{{i.name}}</td><td>{{i.email}}</td><td>{{i.member}}</td><td><select name="country" id="{{i.id}}" class="status">
+                    
+                     <option value="Pending" {% if i.status == "Pending" %} selected="true" {% endif %}>Pending</option>,
+                     <option value="Accept" {% if i.status == "Accept" %} selected="true" {% endif %}>Accept</option>
+                     <option value="Reject" {% if i.status == "Reject" %} selected="true" {% endif %}>Reject</option><td><a href="{% url 'delete_jobseekers' i.id %}"  class="btn btn-primary" onclick="return confirm('Are you sure')" >Delete</a></td></tr></tbody>
+                     {% endfor %}  
+         </table>
+        </div>
+      </div>
+    </div>
+   {% endblock %}

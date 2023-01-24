@@ -1,0 +1,18 @@
+<table class="table table-striped">
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Course</th>
+        <th>Member</th>
+        <th>Coaching branch</th>
+        {% for i in key %}
+    </tr>
+    <tr>
+        <td>{{i.name}}</td>
+        <td>{{i.email}}</td>
+        <td>{{i.course}}</td>
+        <td>{{i.member}}</td>
+        <td>{{i.branch}}</td>
+    </tr>
+    {% endfor %}
+</table>
