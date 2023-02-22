@@ -40,6 +40,9 @@ def jobseekersignup(request):
 def branch(request):
      data="data"
      return render(request,'coaching/branch.html',{"data":data})
+def branch1(request):
+     data="data"
+     return render(request,'coaching/no.html',{"data":data})
 
 def jobseekerlogin(request):
     if request.session.has_key('login1'):
@@ -133,6 +136,7 @@ def oldjob(request):
 def jobseekerprofile(request):
     if request.session.has_key("login1"):
         check=Jobseekerprofile.objects.filter(email=request.session['login1'])
+        jobprofile=Jobseekar.objects.filter(email=request.session['login1'])
         if check.count()==1:
             user_login=Jobseekar.objects.filter(email=request.session['login1'])
             return render(request,'coaching/jobseekerprofile.html',{"key":check,"data":user_login})

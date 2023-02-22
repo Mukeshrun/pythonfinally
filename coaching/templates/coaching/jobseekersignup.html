@@ -12,7 +12,14 @@
             xmlhttp.send();
         }
         function showdata() {
-            document.getElementById('branchset').innerHTML = ""
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+
+                document.getElementById("branchset").innerHTML = xmlhttp.responseText;
+
+            }
+            xmlhttp.open("GET", "/branch1?q=");
+            xmlhttp.send();
         }
     </script>
     <section style="background-color: #508bfc;">   <div class="container-fluid d-flex justify-content-center" style="background-color: #508bfc;">
@@ -74,7 +81,7 @@
                           </div>
                         </div>
                         <div class="form-group-col-md-6" id="branchset">
-                           <input type="hidden" name="branch" value="NA">
+                            
                         </div>
                             <div class="form-group-col-6">
                                 <label for="password">Password</label>
